@@ -7,3 +7,17 @@ cursor = conn.cursor()
 
 # create table for stock data
 # stock factors such as symbol, price, PE ratio, market cap, last time updated
+cursor.execute(''' 
+               CREATE TABLE IF NOT EXISTS stocks (
+               id INTEGER PRIMARY KEY AUTOINCREMENT,
+               symbol TEXT NOT NULL,
+               price REAL,
+               pe_ratio REAL,
+               market_cap REAL,
+               last_updated DATETIME DEFAULT CURRENT_TIMESTAMP)
+               ''')
+
+conn.commit()
+conn.close()
+
+print("database updated")
