@@ -14,6 +14,7 @@ cursor.execute('''
                price REAL,
                pe_ratio REAL,
                market_cap REAL,
+               recommendation TEXT,
                last_updated DATETIME DEFAULT CURRENT_TIMESTAMP)
                ''')
 
