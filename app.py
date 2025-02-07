@@ -1,5 +1,5 @@
 import sqlite3
-import os 
+import math
 from dotenv import load_dotenv
 from analyze_stock import analyze_stock1
 import pandas as pd
@@ -32,6 +32,8 @@ def fetch_financials(symbol):
     pe_ratio = stock.info.get('forwardPE')  # PE ratio
     market_cap = stock.info.get('marketCap')  # Market cap
     stock_price = stock.info.get('regularMarketPrice')  # Current stock price
+
+
 
     if stock_price is None:
         stock_history = stock.history(period="1d")
