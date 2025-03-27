@@ -1,7 +1,4 @@
 #Analyze PE ration
-
-import math
-
 import math
 
 def analyze_stock(symbol, stock_price, pe_ratio, market_cap, eps, bvps):
