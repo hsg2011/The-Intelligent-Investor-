@@ -1,7 +1,7 @@
 import sqlite3
 import math
 from dotenv import load_dotenv
-from analyze_stock import analyze_stock  # Make sure the function is defined in analyze_stock.py
+from analyze_stock import analyze_stock_combined
 import pandas as pd
 import yfinance as yf
 
@@ -50,21 +50,20 @@ def get_sp500_symbols():
     # print(f"Columns in the S&P 500 table: {sp500_table.columns}")
     return sp500_table['Symbol'].tolist()  # Fetching symbols from the table
 
-# Main 
 if __name__ == '__main__':
     sp500_symbols = get_sp500_symbols()
 
-    for stock_symbol in sp500_symbols[:5]:  # Limit to first 5 for testing
+    for stock_symbol in sp500_symbols[:5]:  # Testing with first 5 symbols
         try:
-            # Capture all returned values, including EPS and BVPS
-            pe_ratio, market_cap, stock_price, eps, bvps = fetch_financials(stock_symbol)
-
-            # Call the analyze_stock function (make sure its name is correct in analyze_stock.py)
-            recommendation = analyze_stock(stock_symbol, stock_price, pe_ratio, market_cap, eps, bvps)
-
+            pe_ratio, market_cap, stock_price, eps, bvps, roe, debt_to_equity = fetch_financials(stock_symbol)
+            
+            # Get the combined recommendation
+            recommendation = analyze_stock_combined(stock_symbol, stock_price, pe_ratio, market_cap, eps, bvps, roe, debt_to_equity)
+            
             # Insert the fetched data into the database
             insert_stock_data(stock_symbol, stock_price, pe_ratio, market_cap, recommendation)
-            print(f"{stock_symbol}: PE Ratio = {pe_ratio}, Market Cap = {market_cap}, Stock Price = {stock_price}, Recommendation = {recommendation}")
-
+            
+            print(f"{stock_symbol}: Price = {stock_price}, PE Ratio = {pe_ratio}, Market Cap = {market_cap}")
+            print(f"Recommendation: {recommendation}")
         except Exception as e:
             print(f"Error fetching data for {stock_symbol}: {e}")

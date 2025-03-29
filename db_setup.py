@@ -18,6 +18,13 @@ cursor.execute('''
                last_updated DATETIME DEFAULT CURRENT_TIMESTAMP)
                ''')
 
+# Create table for S&P 500 symbols
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS sp500_symbols (
+        symbol TEXT PRIMARY KEY
+    )
+''')
+
 conn.commit()
 conn.close()
 
