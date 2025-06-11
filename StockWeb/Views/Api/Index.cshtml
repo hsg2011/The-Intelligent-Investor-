@@ -1,0 +1,14 @@
+@model List<string>
+@{
+    ViewData["Title"] = "Select a Stock";
+}
+<h1>Select a Stock</h1>
+<form asp-action="Analyze" method="get">
+    <select name="symbol">
+        @foreach (var sym in Model)
+        {
+            <option value="@sym">@sym</option>
+        }
+    </select>
+    <button type="submit">Analyze</button>
+</form>

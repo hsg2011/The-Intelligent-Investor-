@@ -1,0 +1,11 @@
+@{
+    ViewData["Title"] = "Analysis for " + ViewBag.Symbol;
+}
+<h1>Analysis: @ViewBag.Symbol</h1>
+<p><strong>Recommendation:</strong> @ViewBag.Recommendation</p>
+
+<h2>Price Chart (1Y)</h2>
+<img src="http://localhost:8000/plot/price/@ViewBag.Symbol" alt="Price chart" style="max-width:100%;" />
+
+<h2>P/E Chart (1Y)</h2>
+<img src="http://localhost:8000/plot/pe/@ViewBag.Symbol" alt="P/E chart" style="max-width:100%;" />
